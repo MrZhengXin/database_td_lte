@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include  
 from rest_framework import routers
+from django.conf.urls import url
 from todo import views
 from django.urls import path
 from django.conf import settings
@@ -30,6 +31,7 @@ urlpatterns = [
     # path('', include('todo.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('rest_registration.api.urls')),
+    url(r'^upload/$', views.FileUploadView.as_view(), name='file-upload'),
 ]
 
 if settings.DEBUG:
