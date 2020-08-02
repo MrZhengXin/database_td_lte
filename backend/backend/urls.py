@@ -26,12 +26,17 @@ from django.conf.urls.static import static
 # router.register(r'todos', views.TodoView, 'todo') 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),         
+    path('admin/', admin.site.urls, name='administration'),         
     # path('api/', include(router.urls)),
     # path('', include('todo.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('rest_registration.api.urls')),
     url(r'^upload/$', views.FileUploadView.as_view(), name='file-upload'),
+    url(r'^download/tbATUC2I', views.DownloadTbatuc2IView.as_view(), name='tbATUC2I download'),
+    url(r'^download/tbPCIAssignment', views.DownloadTbpciassignmentView.as_view(), name='tbPCIAssignment download'),
+    url(r'^download/tbATUHandOver', views.DownloadTbatuhandoverView.as_view(), name='tbATUHandOver download'),
+    url(r'^download/tbOptCell', views.DownloadTboptcellView.as_view(), name='tbOptCell download'),
+
 ]
 
 if settings.DEBUG:

@@ -90,7 +90,7 @@ class Tbatudata(models.Model):
 
 
 class Tbatuhandover(models.Model):
-    SSECTOR_ID = models.CharField(db_column='SSECTOR_ID', max_length=50, blank=True, null=True)  # Field name made lowercase.   
+    SSECTOR_ID = models.CharField(db_column='SSECTOR_ID', max_length=50, blank=True, primary_key=True)  # Field name made lowercase.   
     NSECTOR_ID = models.CharField(db_column='NSECTOR_ID', max_length=50, blank=True, null=True)  # Field name made lowercase.
     HOATT = models.IntegerField(db_column='HOATT', blank=True, null=True)  # Field name made lowercase.
 
@@ -201,7 +201,8 @@ class Tbpciassignment(models.Model):
     PCI = models.IntegerField(db_column='PCI', blank=True, null=True)  # Field name made lowercase.
     PSS = models.IntegerField(db_column='PSS', blank=True, null=True)  # Field name made lowercase.
     SSS = models.IntegerField(db_column='SSS', blank=True, null=True)  # Field name made lowercase.
-    LONGITITUDE = models.FloatField(db_column='LONGITITUDE', blank=True, null=True)  # Field name made lowercase.
+    LONGITUDE = models.FloatField(db_column='LONGITUDE', blank=True, null=True)  # Field name made lowercase.
+    LATITUDE = models.FloatField(db_column='LATITUDE', blank=True, null=True)  # Field name made lowercase.
     STYLE = models.CharField(db_column='STYLE', max_length=50, blank=True, null=True)  # Field name made lowercase.
     OPT_DATETIME = models.DateTimeField(db_column='OPT_DATETIME', blank=True, null=True)  # Field name made lowercase.
 

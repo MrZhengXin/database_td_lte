@@ -10,13 +10,16 @@ from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser
 from rest_framework import generics 
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
+from drf_renderer_xlsx.renderers import XLSXRenderer
+from drf_renderer_xlsx.mixins import XLSXFileMixin
 
 from django.views.generic import ListView
 from django.http import HttpResponseRedirect
 from bulk_sync import bulk_sync
 
 from .models import Post
-from .serializers import TodoSerializer, DocumentSerializer      # add this
+from .serializers import *     # add this
 from .models import *                     # add this
 from .forms import PostForm # new
 
@@ -38,6 +41,50 @@ class CreatePostView(CreateView): # new
     form_class = PostForm
     template_name = 'post.html'
     success_url = reverse_lazy('home')
+
+class DownloadTbpciassignmentView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    renderer_classes = [XLSXRenderer, XLSXFileMixin]
+
+    @staticmethod
+    def get(request):
+        queryset = Tbpciassignment.objects.all()
+        serializer = TbpciassignmentSerializer(queryset, many=True)
+        filename = 'Tbpciassignment.xlsx'
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+class DownloadTbatuc2IView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    renderer_classes = [XLSXRenderer, XLSXFileMixin]
+
+    @staticmethod
+    def get(request):
+        queryset = Tbatuc2I.objects.all()
+        serializer = Tbatuc2ISerializer(queryset, many=True)
+        filename = 'Tbatuc2I.xlsx'
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+class DownloadTbatuhandoverView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    renderer_classes = [XLSXRenderer, XLSXFileMixin]
+
+    @staticmethod
+    def get(request):
+        queryset = Tbatuhandover.objects.all()
+        serializer = TbatuhandoverSerializer(queryset, many=True)
+        filename = 'Tbatuhandover.xlsx'
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+class DownloadTboptcellView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    renderer_classes = [XLSXRenderer, XLSXFileMixin]
+
+    @staticmethod
+    def get(request):
+        queryset = Tboptcell.objects.all()
+        serializer = TboptcellSerializer(queryset, many=True)
+        filename = 'Tboptcell.xlsx'
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 primary_keys = {'tbCell': 'SECTOR_ID', 
     'tbKPI': ['起始时间',	'周期',	'网元名称',	'小区',	'小区1'],
