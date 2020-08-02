@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
@@ -97,13 +97,15 @@ DATABASES = {
             'driver': 'ODBC Driver 13 for SQL Server',
         },
     },
-}'''
+}
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'mydatabase',
     }
 }
+'''
 
 # set this to False if you want to turn off pyodbc's connection pooling
 DATABASE_CONNECTION_POOLING = False
