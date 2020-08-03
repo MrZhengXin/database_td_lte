@@ -1,12 +1,13 @@
 # todo/views.py
 
 import pandas as pd
+import datetime
 
 from django.shortcuts import render
 from rest_framework import viewsets          # add this
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
-from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser
+from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser, JSONParser
 from rest_framework import generics 
 from rest_framework import status
 from rest_framework.response import Response
@@ -41,6 +42,33 @@ class CreatePostView(CreateView): # new
     form_class = PostForm
     template_name = 'post.html'
     success_url = reverse_lazy('home')
+
+class QueryTbCellView(APIView):
+    renderer_classes = [JSONRenderer]
+    def get(self, request):
+        attribute, value = request.GET.get('attribute'), request.GET.get('value')
+        if value == "-1":
+            data = Tbcell.objects.values_list(attribute)
+        else:
+            data = Tbcell.objects.filter(**{attribute: value}).values()
+
+        return Response(data)
+
+class QueryTbkpiView(APIView):
+    renderer_classes = [JSONRenderer]
+    def get(self, request):
+        attribute_list = request.GET.get('attribute_list', False)
+        if attribute_list:
+            return Response([f.name for f in Tbkpi._meta.get_fields() 
+                if f.name not in Tbkpi._meta.unique_together[0]])
+        NE, attribute = request.GET.get('NE', None), request.GET.get('attribute', None)
+        l, r = request.GET.get('l', None), request.GET.get('r', None)
+        l = datetime.datetime.strptime(l, '%m/%d/%Y %H:%M:%S')
+        r = datetime.datetime.strptime(r, '%m/%d/%Y %H:%M:%S')
+        data = Tbkpi.objects.filter(网元名称=NE).filter(起始时间__range=(l, r))
+        if attribute is not None:
+            data = data.values_list('起始时间', attribute)
+        return Response(data)
 
 class DownloadTbpciassignmentView(APIView):
     # permission_classes = [permissions.IsAuthenticated]

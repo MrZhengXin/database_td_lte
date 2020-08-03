@@ -222,7 +222,7 @@ class Tbsecadjcell(models.Model):
         unique_together = (('S_SECTOR_ID', 'N_SECTOR_ID'),)
 
 class Tbprb(models.Model):
-    起始时间 = models.CharField(max_length=255, blank=True, primary_key =True)
+    起始时间 = models.DateTimeField(max_length=255, blank=True, primary_key =True)
     周期 = models.CharField(max_length=255, blank=True, null=True)
     网元名称 = models.CharField(max_length=255, blank=True, null=True)
     小区 = models.CharField(max_length=255, blank=True, null=True)
@@ -334,7 +334,7 @@ class Tbprb(models.Model):
         unique_together = (('起始时间',	'周期',	'网元名称',	'小区',	'小区名'), )
 
 class Tbkpi(models.Model):
-    起始时间 = models.CharField(max_length=255, blank=True, primary_key=True)
+    起始时间 = models.DateTimeField(max_length=255, blank=True, primary_key=True)
     周期 = models.CharField(max_length=255, blank=True, null=True)
     网元名称 = models.CharField(max_length=255, blank=True, null=True)
     小区 = models.CharField(max_length=255, blank=True, null=True)

@@ -36,6 +36,9 @@ urlpatterns = [
     url(r'^download/tbPCIAssignment', views.DownloadTbpciassignmentView.as_view(), name='tbPCIAssignment download'),
     url(r'^download/tbATUHandOver', views.DownloadTbatuhandoverView.as_view(), name='tbATUHandOver download'),
     url(r'^download/tbOptCell', views.DownloadTboptcellView.as_view(), name='tbOptCell download'),
+    url(r'query/tbCell/', views.QueryTbCellView.as_view(), name='query tbCell'),
+    url(r'query/tbKPI/', views.QueryTbkpiView.as_view(), name='query tbKPI'),
+
 
 ]
 
