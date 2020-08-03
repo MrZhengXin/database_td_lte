@@ -65,7 +65,23 @@ class QueryTbkpiView(APIView):
         l, r = request.GET.get('l', None), request.GET.get('r', None)
         l = datetime.datetime.strptime(l, '%m/%d/%Y %H:%M:%S')
         r = datetime.datetime.strptime(r, '%m/%d/%Y %H:%M:%S')
-        data = Tbkpi.objects.filter(小区名=NE).filter(起始时间__range=(l, r))
+        data = Tbkpi.objects.filter(小区1=NE).filter(起始时间__range=(l, r))
+        if attribute is not None:
+            data = data.values_list('起始时间', attribute)
+        return Response(data)
+
+class QueryTbprbView(APIView):
+    renderer_classes = [JSONRenderer]
+    def get(self, request):
+        attribute_list = request.GET.get('attribute_list', False)
+        if attribute_list:
+            return Response([f.name for f in Tbprb._meta.get_fields() 
+                if f.name not in Tbprb._meta.unique_together[0]])
+        NE, attribute = request.GET.get('NE', None), request.GET.get('attribute', None)
+        l, r = request.GET.get('l', None), request.GET.get('r', None)
+        l = datetime.datetime.strptime(l, '%m/%d/%Y %H:%M:%S')
+        r = datetime.datetime.strptime(r, '%m/%d/%Y %H:%M:%S')
+        data = Tbprb.objects.filter(小区名=NE).filter(起始时间__range=(l, r))
         if attribute is not None:
             data = data.values_list('起始时间', attribute)
         return Response(data)
