@@ -1,0 +1,67 @@
+//登录：'/api/account/login/'
+// 客户端
+{
+	"login_request": {
+		"username": '', 
+		"password": ''
+	}
+}
+// 服务器
+{
+	"login_permit": 1 //1表示允许登录，0表示不允许登录
+}
+
+//注册：'/api/account/register/'
+// 客户端
+{
+	"register_request":{
+		"username": '',
+		"password": ''
+	}
+}
+// 服务器
+{
+	"register_state": 1 //1表示注册成功，0表示注册失败
+}
+
+//导入数据：'upload/'
+// 客户端
+POST request body{
+	"file": [xx.xlsx] //请求要导入表格文件
+}
+//服务器
+{
+	"[xx.xlsx]"/"empty file" //导入成功返回上传文件名/导入失败返回空文件提示
+}
+
+//下载数据: "download/tbATUC2I" / "download/tbPCIAssignment" / "download/tbATUHandOver" / "download/tbOptCell"
+//客户端
+GET request{}
+//服务器
+{
+	[xx.xlsx] //对应表格文件
+}
+
+//查询数据: 'query/tbCell/?attribute=SECTOR_ID&value=124672-0'
+//客户端
+GET request{}
+//服务器
+{
+	[{"CITY":"三门峡","SECTOR_ID":"124672-0","SECTOR_NAME":"三门峡渑池刘果-HLHF-1","ENODEBID":124672,"ENODEB_NAME":"三门峡渑池刘果-HLHF","EARFCN":38400,"PCI":32,"PSS":2,"SSS":10,"TAC":14531,"VENDOR":"华为","LONGITUDE":111.77068,"LATITUDE":34.810396,"STYLE":"宏站","AZIMUTH":30.0,"HEIGHT":43.0,"ELECTTILT":6.0,"MECHTILT":2.0,"TOTLETILT":8.0}]
+}
+
+//查询数据: 'query/tbKPI/?NE=三门峡连霍义马高速东-HLHF&attribute=无线掉线率_field&attribute_list=False&l=07/18/2016 00:00:00&r=07/19/2016 00:00:00
+//NE 小区名，attribute 查询属性名称，attribute_list 为True表示返回tbKPI属性列表 l,r表示开始时间和结束时间
+//客户端
+GET
+//服务器
+[
+    [
+        "2016-07-18T00:00:00Z", // time
+        "0.003" // value
+    ],
+    [
+        "2016-07-19T00:00:00Z",
+        "0.005"
+    ]
+]

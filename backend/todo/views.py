@@ -65,7 +65,7 @@ class QueryTbkpiView(APIView):
         l, r = request.GET.get('l', None), request.GET.get('r', None)
         l = datetime.datetime.strptime(l, '%m/%d/%Y %H:%M:%S')
         r = datetime.datetime.strptime(r, '%m/%d/%Y %H:%M:%S')
-        data = Tbkpi.objects.filter(网元名称=NE).filter(起始时间__range=(l, r))
+        data = Tbkpi.objects.filter(小区名=NE).filter(起始时间__range=(l, r))
         if attribute is not None:
             data = data.values_list('起始时间', attribute)
         return Response(data)
