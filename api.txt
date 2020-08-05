@@ -1,27 +1,76 @@
-//登录：'/api/account/login/'
+//登录：'account/login/'
 // 客户端
 {
-	"login_request": {
-		"username": '', 
-		"password": ''
-	}
+    "login": "",
+    "password": ""
 }
 // 服务器
+//failed
+HTTP 400 Bad Request
+Allow: OPTIONS, POST
+Content-Type: application/json
+Vary: Accept
+
 {
-	"login_permit": 1 //1表示允许登录，0表示不允许登录
+    "detail": "Login or password invalid."
+}
+//successful
+HTTP 200 OK
+Allow: OPTIONS, POST
+Content-Type: application/json
+Vary: Accept
+
+{
+    "detail": "Login successful"
 }
 
-//注册：'/api/account/register/'
+
+//注册：'account/register/'
 // 客户端
 {
-	"register_request":{
-		"username": '',
-		"password": ''
-	}
+    "username": "",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "password": "",
+    "password_confirm": ""
 }
 // 服务器
+
+// failed
+HTTP 400 Bad Request
+Allow: OPTIONS, POST
+Content-Type: application/json
+Vary: Accept
+
 {
-	"register_state": 1 //1表示注册成功，0表示注册失败
+    "password": [
+        "This password is too common."
+    ],
+    "non_field_errors": []
+}
+HTTP 400 Bad Request
+Allow: OPTIONS, POST
+Content-Type: application/json
+Vary: Accept
+
+{
+    "password_confirm": [
+        "This field may not be blank."
+    ]
+}
+//successful
+HTTP 201 Created
+Allow: OPTIONS, POST
+Content-Type: application/json
+Vary: Accept
+
+{
+    "id": 1,
+    "username": "lenovo",
+    "first_name": "",
+    "last_name": "",
+    "email": ""
 }
 
 //导入数据 3.2.1 ：'upload/'
