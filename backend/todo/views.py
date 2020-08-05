@@ -84,6 +84,19 @@ class CreateDownloadTbc2InewView(APIView):
         filename = 'Tbc2Inew.xlsx'
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+class CreateDownloadTbc2I3View(APIView):
+    renderer_classes = [XLSXRenderer, XLSXFileMixin]
+
+    @staticmethod
+    def get(request):
+        rate = request.GET.get('rate', "0.7")
+        with connection.cursor() as cursor:
+            cursor.execute('exec [dbo].[generate_triSector] %s' % (rate))
+        queryset = Tbc2I3.objects.all()
+        serializer = Tbc2I3Serializer(queryset, many=True)
+        filename = 'Tbc2I3.xlsx'
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
 
 class CreateDownloadTbprbnewView(APIView):
     renderer_classes = [XLSXRenderer, XLSXFileMixin]

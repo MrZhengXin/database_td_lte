@@ -40,6 +40,7 @@ urlpatterns = [
  
     url(r'^create/tbPRBnew', views.CreateDownloadTbprbnewView.as_view(), name='tbPRBnew creation and download'),
     url(r'^create/tbC2Inew/', views.CreateDownloadTbc2InewView.as_view(), name='tbC2Inew creation and download'),
+    url(r'^create/tbC2I3/', views.CreateDownloadTbc2I3View.as_view(), name='tbC2I3 creation and download'),
 
     url(r'query/tbCell/', views.QueryTbCellView.as_view(), name='query tbCell'),
     url(r'query/tbKPI/', views.QueryTbkpiView.as_view(), name='query tbKPI'),

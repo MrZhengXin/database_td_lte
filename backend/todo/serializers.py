@@ -44,6 +44,12 @@ class Tbc2InewSerializer(serializers.ModelSerializer):
         model = Tbc2Inew
         fields = '__all__'
 
+
+class Tbc2I3Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tbc2I3
+        fields = '__all__'
+
 class TbcellSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tbcell

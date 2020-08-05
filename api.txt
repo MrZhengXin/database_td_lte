@@ -50,12 +50,20 @@ GET request{}
 	Tbprbnew.xlsx
 }
 
-//创建与下载tbC2I 3.4: "create/tbC2Inew/?minimum=233" //minimum为参数
+//创建与下载tbC2Inew 3.4.1: "create/tbC2Inew/?minimum=233" //minimum为参数
 //client
 GET request{}
 //server
 {
 	Tbc2Inew.xlsx//file
+}
+
+//创建与下载tbC2I3 3.4.1.2: "create/tbC2I3/?rate=0.8" //rate为参数
+//client
+GET request{}
+//server
+{
+	Tbc2I3.xlsx//file
 }
 
 

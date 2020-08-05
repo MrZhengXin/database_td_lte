@@ -111,6 +111,16 @@ class Tbadjcell(models.Model):
         unique_together = (('S_SECTOR_ID', 'N_SECTOR_ID'),)
 
 
+class Tbc2I3(models.Model):
+    CELL1 = models.CharField(db_column='CELL1', primary_key=True, max_length=255)  # Field name made lowercase.
+    CELL2 = models.CharField(db_column='CELL2', max_length=255)  # Field name made lowercase.
+    CELL3 = models.CharField(db_column='CELL3', max_length=255)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'tbC2I3'
+        unique_together = (('CELL1', 'CELL2', 'CELL3'),)
+
 class Tbc2Inew(models.Model):
     SCELL = models.CharField(db_column='SCELL', primary_key=True, max_length=255)  # Field name made lowercase.
     NCELL = models.CharField(db_column='NCELL', max_length=255)  # Field name made lowercase.

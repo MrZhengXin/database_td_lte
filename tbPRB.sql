@@ -162,6 +162,25 @@ create table tbC2I3(
 )
 go
 
+create procedure generate_triSector @rate float
+as
+	begin
+		with bisector as(
+			select SCELL,NCELL
+			from tbC2Inew
+			where PrbABS6>@rate
+			union
+			select NCELL,SCELL
+			from tbC2Inew
+			where PrbABS6>@rate
+		)
+      insert into tbC2I3
+   		select distinct a.SCELL,a.NCELL,b.SCELL
+	   	from bisector as a,bisector as b
+		   where a.SCELL=b.NCELL and a.SCELL<>b.SCELL and a.SCELL>a.NCELL and a.NCELL>b.SCELL
+	end
+go
+
 create procedure C2I_Analyse @minimum int
 as
 begin
