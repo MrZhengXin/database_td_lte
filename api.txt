@@ -24,7 +24,7 @@
 	"register_state": 1 //1表示注册成功，0表示注册失败
 }
 
-//导入数据：'upload/'
+//导入数据 3.2.1 ：'upload/'
 // 客户端
 POST request body{
 	"file": [xx.xlsx] //请求要导入表格文件
@@ -34,7 +34,7 @@ POST request body{
 	"[xx.xlsx]"/"empty file" //导入成功返回上传文件名/导入失败返回空文件提示
 }
 
-//下载数据: "download/tbATUC2I" / "download/tbPCIAssignment" / "download/tbATUHandOver" / "download/tbOptCell"
+//下载数据 3.2.2: "download/tbATUC2I" / "download/tbPCIAssignment" / "download/tbATUHandOver" / "download/tbOptCell"
 //客户端
 GET request{}
 //服务器
@@ -42,7 +42,24 @@ GET request{}
 	[xx.xlsx] //对应表格文件
 }
 
-//查询数据: 'query/tbCell/?attribute=SECTOR_ID&value=124672-0'
+//创建与下载tbPRB 3.3.4.1: "create/tbPRBnew"
+//client
+GET request{}
+//server
+{
+	Tbprbnew.xlsx
+}
+
+//创建与下载tbC2I 3.4: "create/tbC2Inew/?minimum=233" //minimum为参数
+//client
+GET request{}
+//server
+{
+	Tbc2Inew.xlsx//file
+}
+
+
+//查询数据 3.3.1 3.3.2: 'query/tbCell/?attribute=SECTOR_ID&value=124672-0'
 //客户端
 GET request{}
 //服务器
@@ -50,7 +67,7 @@ GET request{}
 	[{"CITY":"三门峡","SECTOR_ID":"124672-0","SECTOR_NAME":"三门峡渑池刘果-HLHF-1","ENODEBID":124672,"ENODEB_NAME":"三门峡渑池刘果-HLHF","EARFCN":38400,"PCI":32,"PSS":2,"SSS":10,"TAC":14531,"VENDOR":"华为","LONGITUDE":111.77068,"LATITUDE":34.810396,"STYLE":"宏站","AZIMUTH":30.0,"HEIGHT":43.0,"ELECTTILT":6.0,"MECHTILT":2.0,"TOTLETILT":8.0}]
 }
 
-//查询数据: 'query/tbKPI/?NE=三门峡连霍义马高速东-HLHF&attribute=无线掉线率_field&attribute_list=False&l=07/18/2016 00:00:00&r=07/19/2016 00:00:00
+//查询数据 3.3.3: 'query/tbKPI/?NE=三门峡连霍义马高速东-HLHF&attribute=无线掉线率_field&attribute_list=False&l=07/18/2016 00:00:00&r=07/19/2016 00:00:00
 //NE 小区1，attribute 查询属性名称，attribute_list 为True表示返回tbKPI属性列表 l,r表示开始时间和结束时间
 //客户端
 GET
@@ -66,7 +83,7 @@ GET
     ]
 ]
 
-//查询数据: 'query/tbPRB/?NE=三门峡义马310国道煤场-HLHF-1&attribute=第0个prb上检测到的干扰噪声的平均值_field&l=07/17/2016 00:00:00&r=07/17/2016 00:30:00'
+//查询数据 3.3.4.2: 'query/tbPRB/?NE=三门峡义马310国道煤场-HLHF-1&attribute=第0个prb上检测到的干扰噪声的平均值_field&l=07/17/2016 00:00:00&r=07/17/2016 00:30:00'
 //客户端
 GET
 //服务器
@@ -190,3 +207,4 @@ GET
     "第98个prb上检测到的干扰噪声的平均值_field",
     "第99个prb上检测到的干扰噪声的平均值_field"
 ]
+

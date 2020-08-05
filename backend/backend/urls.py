@@ -32,10 +32,15 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('rest_registration.api.urls')),
     url(r'^upload/$', views.FileUploadView.as_view(), name='file-upload'),
+ 
     url(r'^download/tbATUC2I', views.DownloadTbatuc2IView.as_view(), name='tbATUC2I download'),
     url(r'^download/tbPCIAssignment', views.DownloadTbpciassignmentView.as_view(), name='tbPCIAssignment download'),
     url(r'^download/tbATUHandOver', views.DownloadTbatuhandoverView.as_view(), name='tbATUHandOver download'),
     url(r'^download/tbOptCell', views.DownloadTboptcellView.as_view(), name='tbOptCell download'),
+ 
+    url(r'^create/tbPRBnew', views.CreateDownloadTbprbnewView.as_view(), name='tbPRBnew creation and download'),
+    url(r'^create/tbC2Inew/', views.CreateDownloadTbc2InewView.as_view(), name='tbC2Inew creation and download'),
+
     url(r'query/tbCell/', views.QueryTbCellView.as_view(), name='query tbCell'),
     url(r'query/tbKPI/', views.QueryTbkpiView.as_view(), name='query tbKPI'),
     url(r'query/tbPRB/', views.QueryTbprbView.as_view(), name='query tbPRB'),

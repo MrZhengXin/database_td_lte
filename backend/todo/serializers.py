@@ -39,6 +39,11 @@ class Tbc2ISerializer(serializers.ModelSerializer):
         model = Tbc2I
         fields = '__all__'
 
+class Tbc2InewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tbc2Inew
+        fields = '__all__'
+
 class TbcellSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tbcell
@@ -75,6 +80,11 @@ class TbsecadjcellSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class TbprbSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tbprb
+        fields = '__all__'
+
+class TbprbnewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tbprb
         fields = '__all__'
