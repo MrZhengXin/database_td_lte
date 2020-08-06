@@ -116,7 +116,7 @@ GET request{}
 }
 
 
-//查询数据 3.3.1 3.3.2: 'query/tbCell/?attribute=SECTOR_ID&value=124672-0'
+//查询数据 3.3.1 3.3.2: 'query/tbCell/?attribute=SECTOR_ID&value=124672-0' or 'query/tbCell/?attribute=SECTOR_ID&value=-1' 返回SECTOR_ID列表
 //客户端
 GET request{}
 //服务器
