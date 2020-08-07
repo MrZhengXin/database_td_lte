@@ -101,9 +101,10 @@ DATABASES = {
         'PASSWORD': 'Passwordfor2020sqlserver',
         'HOST': 'mssqlserver-319.database.windows.net',
         #'PORT': '',
-
+        # 'DISABLE_SERVER_SIDE_CURSORS': 'True',
         'OPTIONS': {
             'driver': 'ODBC Driver 13 for SQL Server',
+            'MARS_Connection': 'False',
         },
     },
 }
