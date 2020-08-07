@@ -1,0 +1,60 @@
+.App {
+    text-align: center;
+}
+
+.App-header {
+    background-color: #282c34;
+    display: flex;
+    max-height: 12%;
+    float: top;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.title_name{
+    size: 26px;
+    color: aliceblue;
+}
+
+.body_style{
+    background: aliceblue;
+    min-height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu{
+    float: left;
+    min-height: 82%;
+    width: 20%;
+    margin: 15px;
+    background-color: aquamarine;
+}
+
+.content{
+    min-height: 82%;
+    float: right;
+    width: 80%;
+    margin: 10px 10px 10px 0px;
+    background-color: antiquewhite;
+}
+
+.menu_btn{
+    margin: 10px 10px 10px 10px;
+    width: 80%;
+}
+
+.text_strong{
+    color: #8df;
+    text-decoration: aquamarine;
+    font-family:"fantasy";
+    text-align: center;
+    text-indent: 5px;
+}
+.text_color{
+    color: aliceblue;
+}
