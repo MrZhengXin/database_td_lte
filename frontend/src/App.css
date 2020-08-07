@@ -51,6 +51,8 @@
 
 .style_table{
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login_block{
@@ -60,18 +62,28 @@
   padding-top: 10vh;
   background: #282c34;
   width: 60vh;
+  height: 78vh;
   border-style: double;
   border-color: azure;
   border-width: 5px;
 }
 
-.login_btn{
+.login_btn_now{
   width: 50vh;
   height: 30px;
   margin-top: 10px;
   background-color: #282c34;
-  color: aliceblue;
+  color: aqua;
   border-color: aliceblue;
+}
+
+.login_btn{
+    width: 30vh;
+    height: 30px;
+    margin-top: 10px;
+    border-style: none;
+    background-color: #282c34;
+    color: aliceblue;
 }
 
 .font_style{
@@ -81,7 +93,7 @@
     text-align: justify;
     text-justify: distribute-all-lines;
     display: block;
-    width: 20%;
+    width: 24%;
     margin-left: 10px;
     margin-right: 5px;
     margin-top: 8px;
@@ -89,6 +101,7 @@
 
 input[type=text], select {
   width: 70%;
+  max-height: 20px;
   margin-left: 5px;
   margin-right: 10px;
   margin-top: 8px;

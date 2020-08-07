@@ -1,0 +1,140 @@
+.App {
+    text-align: center;
+}
+
+h2 {
+    color: #fff;
+    text-align:left;
+    font-family:"Times New Roman";
+    margin:0px;
+    text-indent:20px;
+    background-color: #282c34;
+    height:40px;
+    padding-top: 10px;
+}
+
+.title_back
+{
+    background-color: #282c34;
+    height:50px;
+}
+
+.App-header {
+    background-color: #282c34;
+    height: 50px;
+}
+
+span{
+    color: aliceblue;
+}
+
+p{
+    color: aliceblue;
+}
+
+.title_name{
+    size: 26px;
+    color: aliceblue;
+}
+
+body {
+    margin: 0;
+    height: auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: black;
+}
+
+.bg{
+    background:url("https://cn.bing.com/th?id=OHR.WobblyBridge_ZH-CN7751845685_UHD.jpg&rf=LaDigue_UHD.jpg&pid=hp&w=2880&h=1620&rs=1&c=4");
+    height: 500px;
+}
+
+.bg-blur{
+    float: left;
+    width: 100%;
+    background-repeat: repeat-y;
+    background-position: center;
+    background-size: cover;
+    -webkit-filter: blur(30px);
+    -moz-filter:blur(15px);
+    -o-filter:blur(15px);
+    -ms-filter: blur(30px);
+    filter: blur(50px);
+}
+
+.body_style{
+    height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu{
+    position: absolute;
+    min-height: 88%;
+    width: 20%;
+    margin: 1% 0% 1% 1%;
+    background-color: rgba(180, 200, 255, 0.5);
+}
+
+.content{
+    position: absolute;
+    right: 0%;
+    min-height: 88%;
+    width: 77%;
+    margin: 1% 1% 1% 1%;
+    background-color: rgba(180, 200, 255, 0.5);
+}
+
+.menu_btn{
+    margin: 10px 10px 0px 10px;
+    width: 80%;
+    max-width: 300px;
+    border-color: aliceblue;
+    background-color: #347;
+    color: aliceblue;
+}
+
+.menu_btn_now{
+    margin: 10px 10px 0px 10px;
+    width: 80%;
+    max-width: 300px;
+    border-color: aliceblue;
+    background-color: darkslateblue;
+    color: aliceblue;
+}
+
+.sub_menu{
+    margin: 10px 10px 0px 10px;
+    width: 60%;
+    border-color: aliceblue;
+    background-color: #347;
+    color: aliceblue;
+}
+
+.sub_menu_now{
+    margin: 10px 10px 0px 10px;
+    width: 60%;
+    border-color: aliceblue;
+    background-color: darkslateblue;
+    color: aliceblue;
+}
+
+.sub_title{
+    color: aliceblue;
+}
+
+.hidden{
+    border-color: aliceblue;
+    width: 300px;
+}
+
+.line_style{
+    width: 100%;
+    height: 1px;
+    border-top: solid aliceblue 1px;
+}
