@@ -65,6 +65,9 @@ class QueryTbkpiView(APIView):
         if attribute_list:
             return Response([f.name for f in Tbkpi._meta.get_fields() 
                 if f.name not in Tbkpi._meta.unique_together[0]])
+        NE_list = request.GET.get('NE_list', False)
+        if NE_list:
+            return Response(Tbkpi.objects.values_list('小区1'))
         NE, attribute = request.GET.get('NE', None), request.GET.get('attribute', None)
         l, r = request.GET.get('l', None), request.GET.get('r', None)
         l = datetime.datetime.strptime(l, '%m/%d/%Y %H:%M:%S')
