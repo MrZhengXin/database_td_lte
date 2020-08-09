@@ -125,7 +125,7 @@ GET request{}
 }
 
 //查询数据 3.3.3: 'query/tbKPI/?NE=三门峡连霍义马高速东-HLHF&attribute=无线掉线率_field&attribute_list=False&l=07/18/2016 00:00:00&r=07/19/2016 00:00:00
-//NE 小区1，attribute 查询属性名称，attribute_list 为True表示返回tbKPI属性列表 l,r表示开始时间和结束时间
+//NE 小区1，attribute 查询属性名称，attribute_list 为True表示返回tbKPI属性列表 l,r表示开始时间和结束时间 NE_list返回小区名单列表
 //客户端
 GET
 //服务器

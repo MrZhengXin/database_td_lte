@@ -155,11 +155,18 @@ class QueryTbprbView(APIView):
         if attribute_list:
             return Response([f.name for f in Tbprb._meta.get_fields() 
                 if f.name not in Tbprb._meta.unique_together[0]])
+        NE_list = request.GET.get('NE_list', False)
+        if NE_list:
+            return Response(Tbprb.objects.values_list('小区名'))
         NE, attribute = request.GET.get('NE', None), request.GET.get('attribute', None)
         l, r = request.GET.get('l', None), request.GET.get('r', None)
         l = datetime.datetime.strptime(l, '%m/%d/%Y %H:%M:%S')
         r = datetime.datetime.strptime(r, '%m/%d/%Y %H:%M:%S')
-        data = Tbprb.objects.filter(小区名=NE).filter(起始时间__range=(l, r))
+        if l.minute != 0 or r.minute != 0:
+            data = Tbprb.objects.filter(小区名=NE).filter(起始时间__range=(l, r))
+        else:
+            data = Tbprbnew.objects.filter(小区名=NE).filter(起始时间__range=(l, r))
+
         if attribute is not None:
             data = data.values_list('起始时间', attribute)
         return Response(data)
