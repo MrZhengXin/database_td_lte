@@ -36,10 +36,8 @@ class DataLoad extends React.Component{
                 console.log('current file is null');
             }else{
                 data.append('file', input_file);  // document.getElementById('name').
-                axios.post(ipaddr + 'upload/', {
-                    file: data,
-                }, {
-                    headers: { "media-type": "multipart/form-data" }
+                axios.post(ipaddr + 'upload/', data, {
+                    headers: { "Content-Type": "multipart/form-data" }
                 }).then(response=>{
                     console.log('response: ' + response.data);
                     if(response.data === "empty file"){
