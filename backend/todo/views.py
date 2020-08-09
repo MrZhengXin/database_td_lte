@@ -226,8 +226,14 @@ def handle_upload_file(upload_file):
     # cursor = connection.cursor()
 
     if file_type == 'xlsx':
-        df = pd.read_excel(upload_file)    
+        df = pd.read_excel(upload_file)
+        if file_name == 'tbCELL':  
+            index_name = df[df['PSS'] not in [0, 1, 2]].index
+            df = df.drop(index_name, inplace=True)  
+            index_name = df[df['SSS'] < 0 or df['SSS'] > 167].index
+            df = df.drop(index_name, inplace=True)  
         values = df.values.tolist()
+
         query = "INSERT INTO %s VALUES" % file_name +  r" (%s" + r", %s" * (len(values[0])-1) + ")"
         cursor.executemany(query, values)
     else:
