@@ -21,19 +21,12 @@ class C2IAnalyse extends React.Component {
     reqTbC2INew(e){
         if(/^\d+$/.test(this.state.mininum)){
             if(Number(this.state.mininum) > 0){
-                axios.get(ipaddr + 'create/tbC2Inew/?minimum=' + this.state.mininum)
-                    .then((rsp)=> {
-                        rsp.blob().then(blob => {
-                            let blobUrl = window.URL.createObjectURL(blob);
-                            let a = document.createElement('a_id');
-                            let filename = rsp.headers.get('Content-Disposition');
-                            a.href = blobUrl;
-                            a.download = filename;
-                            a.click();
-                            window.URL.revokeObjectURL(blobUrl);
-                        });
-                    })
-                    .catch((e) => console.log('err: ' + e));
+                var x=new XMLHttpRequest();
+                x.open("GET", ipaddr + 'create/tbC2Inew/?minimum=' + this.state.mininum, true);
+                x.responseType = 'blob';
+                console.log(x.response);
+                x.onload=function(e){require('../source/DownLoad').download(x.response, "tbC2Inew.xlsx", "excel" ); }
+                x.send();
             }else{
              alert('the number must > 0');
             }

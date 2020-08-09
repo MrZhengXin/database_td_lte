@@ -7,7 +7,7 @@ const ipaddr = 'http://127.0.0.1:8000/';
 const tbName = ['1.tbCell.xlsx', '2.tbAdjCell.xlsx', '3.tbSecAdjCell.xls', '4.tbOptCell.xlsx', '5.tbPCIAssignment.xlsx',
     '6.tbATUData.csv', '7.tbATUC2I.xlsx', '8.tbATUHandOver.csv', '9.tbMROData.csv', '10.tbC2I.xlsx', '11.tbHandOver.xlsx',
     '12.tbKPI.xlsx', '13.tbPRB.xlsx']
-const download = ['tbATUC2I', 'tbPCIAssignment', 'tbATUHandOver', 'tbOptCell']
+const download_file = ['tbATUC2I', 'tbPCIAssignment', 'tbATUHandOver', 'tbOptCell']
 
 class DataLoad extends React.Component{
     constructor(props) {
@@ -37,7 +37,13 @@ class DataLoad extends React.Component{
             }else{
                 data.append('file', input_file);  // document.getElementById('name').
                 axios.post(ipaddr + 'upload/', data, {
+<<<<<<< HEAD
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'multipart/form-data; charset=utf-8'}
+=======
                     headers: { "Content-Type": "multipart/form-data" }
+>>>>>>> f0242ffafc106d2fc273e5a9cac43465eb648cb4
                 }).then(response=>{
                     console.log('response: ' + response.data);
                     if(response.data === "empty file"){
@@ -59,27 +65,12 @@ class DataLoad extends React.Component{
 
     handleOutputSubmit(e){
         if(this.state.outFileName.length > 0){
-            console.log(ipaddr + 'download/' + this.state.outFileName);
-            axios.get(ipaddr + 'download/' + this.state.outFileName, {
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json; charset=utf-8',
-                    withCredentials: true,
-                }
-            })
-                .then((response) => {
-                response.blob().then(blob => {
-                    let blobUrl = window.URL.createObjectURL(blob);
-                    let aElement = document.getElementById('downloadDiv'); //获取a标签元素
-                    let filename = 'filename' + '.zip';//设置文件名称
-                    aElement.href = blobUrl;//设置a标签路径
-                    aElement.download = filename;
-                    aElement.click();
-                    window.URL.revokeObjectURL(blobUrl);
-                });
-            }).catch((error) => {
-                console.log(error);
-            });
+            var x=new XMLHttpRequest();
+            x.open("GET", ipaddr + 'download/' + this.state.outFileName, true);
+            x.responseType = 'blob';
+            console.log(x.response);
+            x.onload=function(e){require('../source/DownLoad').download(x.response, "target.xlsx", "excel" ); }
+            x.send();
         }else{
             alert('未选择要导出的数据表');
         }
@@ -138,7 +129,7 @@ class DataLoad extends React.Component{
                                 <span>选择要导出的数据表：</span>
                                 <select className="input_bar" onChange={(e)=>{this.setState({outFileName: e.target.value})}}>
                                     <option value="">------请选择------</option>
-                                    {download.map((name)=> <option value={name}>{name + "表"}</option>)}
+                                    {download_file.map((name)=> <option value={name}>{name + "表"}</option>)}
                                 </select>
                             </div>
                             <input type="submit" className="menu_btn" value="确定"/>
@@ -168,6 +159,7 @@ class DataLoad extends React.Component{
                     </div>
                     <div className="content">
                         {content}
+                        <div id="downloadItem" style={{display: 'none'}}/>
                     </div>
                 </body>
             </div>
