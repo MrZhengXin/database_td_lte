@@ -6,6 +6,7 @@ import echarts from 'echarts/lib/echarts';// 引入柱状图
 import 'echarts/lib/chart/bar';// 引入提示框和标题组件
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
+import '../data-manip/DataLoad.css';
 
 class MyChart extends React.Component{
     constructor(props) {
@@ -14,12 +15,17 @@ class MyChart extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="chart">
                 <ReactEcharts
                     option={
                         {
                             title: {
-                                text: 'KPI属性指标在日期上的变化'
+                                text: this.props.table + '表的' + this.props.attr + '属性指标在日期上的分布情况图',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#efefff'
+                                },
+                                x: 'center'
                             },
                             // tooltip: {
                             //     trigger: 'axis'

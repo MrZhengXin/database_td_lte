@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './DataLoad.css';
 import axios from 'axios';
 
-const ipaddr = '127.0.0.1/'
+const ipaddr = 'http://127.0.0.1:8000/';
 const tbName = ['1.tbCell.xlsx', '2.tbAdjCell.xlsx', '3.tbSecAdjCell.xls', '4.tbOptCell.xlsx', '5.tbPCIAssignment.xlsx',
     '6.tbATUData.csv', '7.tbATUC2I.xlsx', '8.tbATUHandOver.csv', '9.tbMROData.csv', '10.tbC2I.xlsx', '11.tbHandOver.xlsx',
     '12.tbKPI.xlsx', '13.tbPRB.xlsx']
-const download = ['tbATUC1I', 'tbPCIAssignment', 'tbATUHandOver', 'tbOptCell']
+const download = ['tbATUC2I', 'tbPCIAssignment', 'tbATUHandOver', 'tbOptCell']
 
 class DataLoad extends React.Component{
     constructor(props) {
@@ -30,15 +30,28 @@ class DataLoad extends React.Component{
     handleInputSubmit(e){
         const data = new FormData();
         if(this.state.inputFileName.length > 0){  // this.state.inputFileName.length > 0
-            console.log('file: ' + this.state.inputFileName);
-            if (this.fileInput.current == null){
+            const input_file = document.getElementById('import').files[0];
+            console.log("name: " + input_file.name + '  size: ' + input_file.size);
+            if (input_file == null){
                 console.log('current file is null');
             }else{
-                data.append('file', this.fileInput.current.files[0]);  // document.getElementById('name').
-                fetch(ipaddr + 'data-manip/data-load/upload', {
-                    method: 'POST',
-                    body: data
-                }).then(response=>console.log('response: ' + response));
+                data.append('file', input_file);  // document.getElementById('name').
+                axios.post(ipaddr + 'upload/', {
+                    file: data,
+                }, {
+                    headers: { "media-type": "multipart/form-data" }
+                }).then(response=>{
+                    console.log('response: ' + response.data);
+                    if(response.data === "empty file"){
+                        alert('failed');
+                    }else if(response.data.length > 0){
+                        alert('import successfully');
+                    }
+                })
+                .catch((e)=>{
+                    alert(e);
+                    console.log('err: ' + e);
+                });
             }
         }else{
             console.log('no file chosed');
@@ -48,9 +61,15 @@ class DataLoad extends React.Component{
 
     handleOutputSubmit(e){
         if(this.state.outFileName.length > 0){
-            fetch(ipaddr + this.state.outFileName, { //downloadFiles 接口请求地址
-                method: 'get'
-            }).then((response) => {
+            console.log(ipaddr + 'download/' + this.state.outFileName);
+            axios.get(ipaddr + 'download/' + this.state.outFileName, {
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json; charset=utf-8',
+                    withCredentials: true,
+                }
+            })
+                .then((response) => {
                 response.blob().then(blob => {
                     let blobUrl = window.URL.createObjectURL(blob);
                     let aElement = document.getElementById('downloadDiv'); //获取a标签元素
@@ -61,8 +80,10 @@ class DataLoad extends React.Component{
                     window.URL.revokeObjectURL(blobUrl);
                 });
             }).catch((error) => {
-                console.log('文件下载失败', error);
+                console.log(error);
             });
+        }else{
+            alert('未选择要导出的数据表');
         }
         e.preventDefault();
     }
@@ -81,7 +102,7 @@ class DataLoad extends React.Component{
                         <form onSubmit={this.handleInputSubmit}>
                             <div>
                                 <span>导入文件: </span>
-                                <input type="text" value={this.state.inputFileName} readOnly/>
+                                <input className="input_bar" type="text" value={this.state.inputFileName} readOnly/>
                                 <button
                                     type="button"  // 防止被默认为submit
                                     onClick={()=>{
@@ -90,6 +111,7 @@ class DataLoad extends React.Component{
                                     }}>浏览</button><br/>
                                 <input type="submit" className="menu_btn" value="确定"/><br/>
                                 <input
+                                    className="input_bar"
                                     type="file"
                                     accept=".xlsx, .xls, .csv"
                                     onChange={(e) => {
@@ -116,7 +138,8 @@ class DataLoad extends React.Component{
                         <form onSubmit={(e)=>this.handleOutputSubmit(e)}>
                             <div>
                                 <span>选择要导出的数据表：</span>
-                                <select onChange={(e)=>{this.setState({outFileName: e.target.value})}}>
+                                <select className="input_bar" onChange={(e)=>{this.setState({outFileName: e.target.value})}}>
+                                    <option value="">------请选择------</option>
                                     {download.map((name)=> <option value={name}>{name + "表"}</option>)}
                                 </select>
                             </div>

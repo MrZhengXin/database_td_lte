@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './DataLoad.css';
 import axios from 'axios';
 
-const ipaddr = '127.0.0.1/'
+const ipaddr = 'http://127.0.0.1:8000/';
 const tbName = ['1.tbCell.xlsx', '2.tbAdjCell.xlsx', '3.tbSecAdjCell.xls', '4.tbOptCell.xlsx', '5.tbPCIAssignment.xlsx',
     '6.tbATUData.csv', '7.tbATUC2I.xlsx', '8.tbATUHandOver.csv', '9.tbMROData.csv', '10.tbC2I.xlsx', '11.tbHandOver.xlsx',
     '12.tbKPI.xlsx', '13.tbPRB.xlsx']
@@ -58,8 +58,8 @@ class MultCover extends React.Component {
                 <div>
                     <form onSubmit={this.reqTbC2I3}>
                         <span>PrbABS6最小概率数（0.0-1.0）：</span>
-                        <input typeof="text" onChange={(e)=>this.setState({rate: e.target.value})}/>
-                        <button type="submit">数据导出</button>
+                        <input className="input_bar" typeof="text" onChange={(e)=>this.setState({rate: e.target.value})}/>
+                        <button className="vt_margin" type="submit">数据导出</button>
                     </form>
                 </div>
             </div>

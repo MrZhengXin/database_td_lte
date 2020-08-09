@@ -4,24 +4,22 @@
 
 h2 {
     color: #fff;
-    text-align:left;
+    text-align: left;
     font-family:"Times New Roman";
     margin:0px;
-    text-indent:20px;
+    text-indent:0px;
     background-color: #282c34;
-    height:40px;
-    padding-top: 10px;
+    height: 15%;
+    padding-top: 5px;
 }
 
-.title_back
-{
-    background-color: #282c34;
-    height:50px;
+.title_name{
+    size: 22px;
+    color: aliceblue;
 }
 
 .App-header {
-    background-color: #282c34;
-    height: 50px;
+
 }
 
 span{
@@ -32,14 +30,9 @@ p{
     color: aliceblue;
 }
 
-.title_name{
-    size: 26px;
-    color: aliceblue;
-}
-
 body {
     margin: 0;
-    height: auto;
+    min-height: 85%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -82,11 +75,12 @@ body {
 }
 
 .content{
+    display: table;
     position: absolute;
-    right: 0%;
     min-height: 88%;
     width: 77%;
-    margin: 1% 1% 1% 1%;
+    min-width: 77%;
+    margin: 1% 1% 1% 22%;
     background-color: rgba(180, 200, 255, 0.5);
 }
 
@@ -137,4 +131,56 @@ body {
     width: 100%;
     height: 1px;
     border-top: solid aliceblue 1px;
+}
+
+.text_strong{
+    margin: 0px;
+    color: rgba(180, 180, 255, 1.0);
+    font-size: 12px;
+}
+
+.text_color{
+    margin: 0px;
+    color: aliceblue;
+    font-size: 10px;
+}
+
+th{
+    margin: 0px;
+}
+
+table, tr{
+    align-self: center;
+    position: center;
+    border: 1px solid aliceblue;
+}
+
+.input_bar{
+    width: 25%;
+    max-width: 150px;
+    min-width: 80px;
+}
+
+.left_align{
+    position: absolute;
+    left: 20px;
+    margin: 1px 1px 1px 15px;
+}
+
+.right_align{
+    position: absolute;
+    right: 20px;
+    margin: 1px 15px 1px 1px;
+}
+
+.in_visiable{
+    visibility: hidden;
+}
+
+.vt_margin{
+    margin: 1px 10px 1px 10px;
+}
+
+.chart{
+    margin: 25px 15px 15px 15px;
 }

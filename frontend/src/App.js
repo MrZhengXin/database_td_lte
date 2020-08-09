@@ -4,7 +4,7 @@ import './App.css';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 
-const ipaddr = 'https://127.0.0.1/';
+const ipaddr = 'http://127.0.0.1:8000/';
 
 class LoginEnd extends React.Component{
     constructor(props){
@@ -24,33 +24,65 @@ class LoginEnd extends React.Component{
     }
 
     loginRequest(){
-        alert("login");
-        axios.post(ipaddr + 'account/login/', {
-            "login": this.state.username,
-            "password": this.state.password
-        }).then((response)=>{
-                console.log('response: ' + response)
-        }).catch((e)=>{
-            console.log('error: ' + e)
-        });
-        //登录成功后
-        this.setState({redirect: true});
+        if(this.state.username === ''){
+            alert('用户名为空, 请重新输入');
+        }else if(this.state.password === ''){
+            alert('密码为空，请重新输入');
+        }else{
+            axios.post(ipaddr + 'account/login/', {
+                "login": this.state.username,
+                "password": this.state.password
+            }).then((response)=>{
+                console.log('response: ' + response.data);
+                if(response.data.detail != null && response.data.detail === "Login successful"){  // 登录成功
+                    alert("登录成功");
+                    this.setState({redirect: true});
+                }else{
+                    alert('账户不存在或密码输入有误');
+                }
+            }).catch((e)=>{
+                console.log('error: ' + e)
+            });
+        }
     }
 
     registerRequest(){
-        alert("register");
-        axios.post(ipaddr + 'account/login/', {
-            "username": this.state.username,
-            "first_name": this.state.first_name,
-            "last_name": this.state.last_name,
-            "email": this.state.email,
-            "password": this.state.password,
-            "password_confirm": this.state.password_comfirm
-        }).then((response)=>{
-            console.log('response: ' + response)
-        }).catch((e)=>{
-            console.log('error: ' + e)
-        })
+        if(this.state.username === ''){
+            alert('用户名为空, 请重新输入');
+        }else if(this.state.first_name === ''){
+            alert('姓氏为空，请重新输入');
+        }else if(this.state.last_name === ''){
+            alert('名字为空，请重新输入');
+        }else if(this.state.email === ''){
+            alert('邮箱号为空，请重新输入');
+        }else if(this.state.password === ''){
+            alert('密码为空，请重新输入');
+        }else if(this.state.password !== this.state.password_comfirm){
+            alert('两次密码输入不一样，请重新输入');
+        }else{
+            axios.post(ipaddr + 'account/register/', {
+                "username": this.state.username,
+                "first_name": this.state.first_name,
+                "last_name": this.state.last_name,
+                "email": this.state.email,
+                "password": this.state.password,
+                "password_confirm": this.state.password_comfirm
+            }).then((response)=>{
+                console.log('response: ' + response.data);
+                if (response.data.id != null){
+                    console.log('id: ' + response.data.id);
+                    console.log('username: ' + response.data.username + '  email: ' + response.data.email);
+                    alert('register successfully');
+                    this.setState({loginMode: true});
+                }else if(response.data.email != null){
+                    alert(response.data.email);
+                }else{
+                    alert('fail');
+                }
+            }).catch((e)=>{
+                console.log('error: ' + e);
+            });
+        }
     }
 
     render(){
