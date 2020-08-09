@@ -67,6 +67,7 @@ class InfoQuery extends React.Component {
         this.queryPRB = this.queryPRB.bind(this);
         this.queryENodeB = this.queryENodeB.bind(this);
         this.queryKPI = this.queryKPI.bind(this);
+        this.exportPRB = this.exportPRB.bind(this);
     }
 
     querySelection(event){
@@ -246,6 +247,15 @@ class InfoQuery extends React.Component {
             alert('no input');
         }
         e.preventDefault();
+    }
+
+    exportPRB(){
+        var x=new XMLHttpRequest();
+        x.open("GET", ipaddr + 'create/tbPRBnew', true);
+        x.responseType = 'blob';
+        console.log(x.response);
+        x.onload=function(e){require('../source/DownLoad').download(x.response, "tbPRBnew.xlsx", "excel" ); }
+        x.send();
     }
 
     render(){
@@ -451,6 +461,7 @@ class InfoQuery extends React.Component {
                         </label>
                         <button type="submit" className="menu_btn">确认</button>
                     </form>
+                        <button className="right_align" onClick={this.exportPRB}>小时级数据导出</button>
                     </div>
                     {
                         this.state.pdate_vals.length > 0 &&

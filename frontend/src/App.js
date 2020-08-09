@@ -67,6 +67,10 @@ class LoginEnd extends React.Component{
                 "email": this.state.email,
                 "password": this.state.password,
                 "password_confirm": this.state.password_comfirm
+            }, {
+                headers: {
+                    "Content-Type": "json"
+                }
             }).then((response)=>{
                 console.log('response: ' + response.data);
                 if (response.data.id != null){

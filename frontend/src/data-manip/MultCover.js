@@ -23,19 +23,12 @@ class MultCover extends React.Component {
             var rt = parseFloat(this.state.rate);
             console.log('rate: ' + rt.toString());
             if(rt > 0.0 && rt < 1.0){
-                axios.get(ipaddr + 'create/tbC2I3/?rate=' + this.state.rate)
-                    .then((rsp)=> {
-                        rsp.blob().then(blob => {
-                            let blobUrl = window.URL.createObjectURL(blob);
-                            let a = document.createElement('a_id');
-                            let filename = rsp.headers.get('Content-Disposition');
-                            a.href = blobUrl;
-                            a.download = filename;
-                            a.click();
-                            window.URL.revokeObjectURL(blobUrl);
-                        });
-                    })
-                    .catch((e) => console.log('err: ' + e));
+                var x=new XMLHttpRequest();
+                x.open("GET", ipaddr + 'create/tbC2I3/?rate=' + this.state.rate, true);
+                x.responseType = 'blob';
+                console.log(x.response);
+                x.onload=function(e){require('../source/DownLoad').download(x.response, "target.xlsx", "excel" ); }
+                x.send();
             }else{
                 alert('input number must > 0.0 and < 1.0');
             }
