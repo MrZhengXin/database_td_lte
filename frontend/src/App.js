@@ -69,7 +69,7 @@ class LoginEnd extends React.Component{
                 "password_confirm": this.state.password_comfirm
             }, {
                 headers: {
-                    "Content-Type": "json"
+                    "Content-Type": "application/json"
                 }
             }).then((response)=>{
                 console.log('response: ' + response.data);
