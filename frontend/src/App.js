@@ -51,6 +51,7 @@ class LoginEnd extends React.Component{
     }
 
     registerRequest(){
+<<<<<<< HEAD
         var data = {
             "username": this.state.username,
             "first_name": this.state.first_name,
@@ -88,6 +89,48 @@ class LoginEnd extends React.Component{
                 alt += (ky + ': ' + error.response.data[ky] + '\n');
             alert(alt);
         });
+=======
+        if(this.state.username === ''){
+            alert('用户名为空, 请重新输入');
+        }else if(this.state.first_name === ''){
+            alert('姓氏为空，请重新输入');
+        }else if(this.state.last_name === ''){
+            alert('名字为空，请重新输入');
+        }else if(this.state.email === ''){
+            alert('邮箱号为空，请重新输入');
+        }else if(this.state.password === ''){
+            alert('密码为空，请重新输入');
+        }else if(this.state.password !== this.state.password_comfirm){
+            alert('两次密码输入不一样，请重新输入');
+        }else{
+            axios.post(ipaddr + 'account/register/', {
+                "username": this.state.username,
+                "first_name": this.state.first_name,
+                "last_name": this.state.last_name,
+                "email": this.state.email,
+                "password": this.state.password,
+                "password_confirm": this.state.password_comfirm
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then((response)=>{
+                console.log('response: ' + response.data);
+                if (response.data.id != null){
+                    console.log('id: ' + response.data.id);
+                    console.log('username: ' + response.data.username + '  email: ' + response.data.email);
+                    alert('register successfully');
+                    this.setState({loginMode: true});
+                }else if(response.data.email != null){
+                    alert(response.data.email);
+                }else{
+                    alert('fail');
+                }
+            }).catch((e)=>{
+                console.log('error: ' + e);
+            });
+        }
+>>>>>>> a6b090097ccdf571f3e824a845adfcb4c551d256
     }
 
     render(){
