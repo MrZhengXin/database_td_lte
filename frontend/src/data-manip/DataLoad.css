@@ -159,6 +159,7 @@ table, tr{
     width: 25%;
     max-width: 150px;
     min-width: 80px;
+    border-radius: 6px;
 }
 
 .left_align{

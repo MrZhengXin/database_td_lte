@@ -224,7 +224,10 @@ class InfoQuery extends React.Component {
                     console.log('data: ' + response.data);
                     this.setState({date_vals: response.data});
                 })
-                .catch((e)=>console.log('error: ' + e));
+                .catch((e)=> {
+                    console.log('error: ' + e);
+                    alert(e);
+                });
         }else{
             alert('no input');
         }
@@ -234,15 +237,18 @@ class InfoQuery extends React.Component {
     queryPRB(e){
         if(this.state.pneName.length > 0 && this.state.pattr.length > 0) {
             var qry = ipaddr + 'query/tbPRB/?NE=' + this.state.pneName + '&attribute=' +
-                this.state.pattr + '$attribute_list=False&l=' + moment(this.state.beg).format("MM/DD/YYY HH:mm:ss") + '&r=' +
-                moment(this.state.end).format("MM/DD/YYY HH:mm:ss");
+                this.state.pattr + '&l=' + moment(this.state.beg).format("MM/DD/YYYY HH:mm:ss") + '&r=' +
+                moment(this.state.end).format("MM/DD/YYYY HH:mm:ss");
             console.log('qry' + qry);
             axios.get(qry)
                 .then((response)=>{
                     console.log('data:' + response.data);
                     this.setState({pdate_vals: response.data})
                 })
-                .catch((e)=>console.log('error: ' + e));
+                .catch((e)=> {
+                    alert(e);
+                    console.log('error: ' + e);
+                });
         }else{
             alert('no input');
         }

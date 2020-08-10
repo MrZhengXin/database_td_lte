@@ -32,7 +32,7 @@ class DataManip extends React.Component {
                         <button className="menu_btn" onClick={()=>{this.props.history.push('/data-manip/data-load')}}>数据管理</button>
                         <button className="menu_btn" onClick={()=>{this.props.history.push('/data-manip/info-query')}}>信息查询</button>
                         <button className="menu_btn" onClick={()=>{this.props.history.push('/data-manip/C2I-analyse')}}>主邻小区C2I干扰分析</button>
-                        <button className="menu_btn" onClick={()=>{this.props.history.push('/data-manip/nult-cover')}}>查询重叠覆盖干扰三元组</button>
+                        <button className="menu_btn" onClick={()=>{this.props.history.push('/data-manip/mult-cover')}}>查询重叠覆盖干扰三元组</button>
                     </div>
                     <div className="content">
                         {content}

@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 
@@ -40,53 +41,53 @@ class LoginEnd extends React.Component{
                 }else{
                     alert('账户不存在或密码输入有误');
                 }
-            }).catch((e)=>{
-                console.log('error: ' + e)
+            }).catch((error)=>{
+                var alt = '';
+                for(var ky in error.response.data)
+                    alt += (ky + ': ' + error.response.data[ky] + '\n');
+                alert(alt);
             });
         }
     }
 
     registerRequest(){
-        if(this.state.username === ''){
-            alert('用户名为空, 请重新输入');
-        }else if(this.state.first_name === ''){
-            alert('姓氏为空，请重新输入');
-        }else if(this.state.last_name === ''){
-            alert('名字为空，请重新输入');
-        }else if(this.state.email === ''){
-            alert('邮箱号为空，请重新输入');
-        }else if(this.state.password === ''){
-            alert('密码为空，请重新输入');
-        }else if(this.state.password !== this.state.password_comfirm){
-            alert('两次密码输入不一样，请重新输入');
-        }else{
-            axios.post(ipaddr + 'account/register/', {
-                "username": this.state.username,
-                "first_name": this.state.first_name,
-                "last_name": this.state.last_name,
-                "email": this.state.email,
-                "password": this.state.password,
-                "password_confirm": this.state.password_comfirm
-            }, {
-                headers: {
-                    "Content-Type": "json"
-                }
-            }).then((response)=>{
-                console.log('response: ' + response.data);
-                if (response.data.id != null){
-                    console.log('id: ' + response.data.id);
-                    console.log('username: ' + response.data.username + '  email: ' + response.data.email);
-                    alert('register successfully');
-                    this.setState({loginMode: true});
-                }else if(response.data.email != null){
-                    alert(response.data.email);
-                }else{
-                    alert('fail');
-                }
-            }).catch((e)=>{
-                console.log('error: ' + e);
-            });
-        }
+        var data = {
+            "username": this.state.username,
+            "first_name": this.state.first_name,
+            "last_name": this.state.last_name,
+            "email": this.state.email,
+            "password": this.state.password,
+            "password_confirm": this.state.password_comfirm,
+        };
+        var path = ipaddr + 'account/register/';
+        console.log("path: " + path + "\ndata: " + JSON.stringify(data));
+        axios.post(ipaddr + 'account/register/', {
+            "username": this.state.username,
+            "first_name": this.state.first_name,
+            "last_name": this.state.last_name,
+            "email": this.state.email,
+            "password": this.state.password,
+            "password_confirm": this.state.password_comfirm,
+        }, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((response)=>{
+            if(response.data.id != null){
+                alert('register successfully');
+                this.setState({loginMode: true});
+            }else{
+                var alt = '';
+                for(var ky in response.data)
+                    alt += ky + ': ' +response.data[ky];
+                alert('输入有误：' + alt);
+            }
+        }).catch((error)=>{
+            var alt = '';
+            for(var ky in error.response.data)
+                alt += (ky + ': ' + error.response.data[ky] + '\n');
+            alert(alt);
+        });
     }
 
     render(){
@@ -97,11 +98,11 @@ class LoginEnd extends React.Component{
                     <form>
                         <div className="style_table">
                             <b className="font_style">用户名：</b>
-                            <input type="text" onChange={(e)=>this.setState({username: e.target.value})}/>
+                            <input lassName="input_bar2" type="text" onChange={(e)=>this.setState({username: e.target.value})}/>
                         </div>
                         <div className="style_table">
                             <b className="font_style">密 码：</b>
-                            <input type="text" onChange={(e)=>this.setState({password: e.target.value})}/>
+                            <input className="input_bar2" style={{left: '0px'}} type="password" onChange={(e)=>this.setState({password: e.target.value})}/>
                         </div>
                     </form>
                     <button className="login_btn_now" onClick={this.loginRequest}>登录</button>
@@ -114,27 +115,27 @@ class LoginEnd extends React.Component{
                     <form>
                         <div className="style_table">
                             <b className="font_style">用户名：</b>
-                            <input type="text" onChange={(e)=>this.setState({username: e.target.value})}/>
+                            <input className="input_bar2" type="text" onChange={(e)=>this.setState({username: e.target.value})}/>
                         </div>
                         <div className="style_table">
                             <b className="font_style">姓 氏：</b>
-                            <input type="text" onChange={(e)=>this.setState({first_name: e.target.value})}/>
+                            <input className="input_bar2" type="text" onChange={(e)=>this.setState({first_name: e.target.value})}/>
                         </div>
                         <div className="style_table">
                             <b className="font_style">名 字：</b>
-                            <input type="text" onChange={(e)=>this.setState({last_name: e.target.value})}/>
+                            <input className="input_bar2" type="text" onChange={(e)=>this.setState({last_name: e.target.value})}/>
                         </div>
                         <div className="style_table">
                             <b className="font_style">邮 箱：</b>
-                            <input type="text" onChange={(e)=>this.setState({email: e.target.value})}/>
+                            <input className="input_bar2" type="text" onChange={(e)=>this.setState({email: e.target.value})}/>
                         </div>
                         <div className="style_table">
                             <b className="font_style">密 码：</b>
-                            <input type="text" onChange={(e)=>this.setState({password: e.target.value})}/>
+                            <input className="input_bar2" type="password" onChange={(e)=>this.setState({password: e.target.value})}/>
                         </div>
                         <div className="style_table">
                             <b className="font_style">密码确认：</b>
-                            <input type="text" onChange={(e)=>this.setState({password_comfirm: e.target.value})}/>
+                            <input className="input_bar2" type="password" onChange={(e)=>this.setState({password_comfirm: e.target.value})}/>
                         </div>
                     </form>
                     <button className="login_btn_now" onClick={this.registerRequest}>注册</button>

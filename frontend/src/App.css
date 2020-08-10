@@ -95,7 +95,7 @@
     text-align: justify;
     text-justify: distribute-all-lines;
     display: block;
-    width: 24%;
+    width: 28%;
     margin-left: 10px;
     margin-right: 5px;
     margin-top: 8px;
@@ -111,4 +111,10 @@ input[type=text], select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+.input_bar2{
+    width: 66%;
+    border-radius: 6px;
+    margin: 2% 2% 0% 2%;
 }

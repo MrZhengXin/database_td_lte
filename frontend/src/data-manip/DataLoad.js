@@ -37,24 +37,20 @@ class DataLoad extends React.Component{
             }else{
                 data.append('file', input_file);  // document.getElementById('name').
                 axios.post(ipaddr + 'upload/', data, {
-<<<<<<< HEAD
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'multipart/form-data; charset=utf-8'}
-=======
-                    headers: { "Content-Type": "multipart/form-data" }
->>>>>>> f0242ffafc106d2fc273e5a9cac43465eb648cb4
                 }).then(response=>{
                     console.log('response: ' + response.data);
                     if(response.data === "empty file"){
-                        alert('failed');
+                        alert('导入失败：empty file');
                     }else if(response.data.length > 0){
-                        alert('import successfully');
+                        alert('导入成功');
                     }
                 })
                 .catch((e)=>{
-                    alert(e);
-                    console.log('err: ' + e);
+                    alert('导入失败: ' + e);
+                    console.log();
                 });
             }
         }else{
